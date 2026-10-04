@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bot Blaster</title>
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="vignette"></div>
+    <div id="dmg-layer"></div>
+
+    <div id="wave-box">
+      <div id="hud-wave">WAVE 1</div>
+      <div id="hud-left">Bots left: 0</div>
+    </div>
+    <div id="boss-bar" class="hidden">
+      <div class="boss-name">MEGA BOT</div>
+      <div class="bar"><div id="boss-fill"></div></div>
+    </div>
+    <div id="score-box">
+      <div id="hud-score">0</div>
+      <div id="hud-kills">0 kills</div>
+    </div>
+
+    <div id="crosshair">
+      <i class="ch t"></i><i class="ch b"></i><i class="ch l"></i><i class="ch r"></i><i class="dot"></i>
+    </div>
+    <div id="hitmarker"><i></i><i></i><i></i><i></i></div>
+    <div id="feed"></div>
+
+    <div id="banner" class="hidden">
+      <div id="banner-big">WAVE 1</div>
+      <div id="banner-small"></div>
+    </div>
+    <div id="reload-hint" class="hidden">Press <b>R</b> to reload</div>
+
+    <div id="hp-box">
+      <div class="label">HEALTH</div>
+      <div class="bar"><div id="hp-fill"></div></div>
+      <div id="hp-text">100</div>
+    </div>
+    <div id="weapon-box">
+      <div id="weapon-slots"></div>
+      <div id="ammo"><b id="ammo-mag">12</b><span id="ammo-res">/ ∞</span></div>
+      <div id="weapon-name">Blaster Pistol</div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div id="screen-title" class="screen">
+    <div class="panel title-panel">
+      <h1 class="logo"><span>BOT</span> <span>BLASTER</span></h1>
+      <p class="subtitle">The robots are coming. Survive as many waves as you can.</p>
+      <div id="title-best" class="best"></div>
+      <button class="btn big" data-action="play">▶ Play</button>
+      <button class="btn" data-action="settings">Settings</button>
+      <button class="btn danger" data-action="quit">Quit</button>
+      <div class="controls">
+        <div><kbd>WASD</kbd> move</div><div><kbd>Mouse</kbd> aim</div>
+        <div><kbd>Left click</kbd> shoot</div><div><kbd>Right click</kbd> zoom</div>
+        <div><kbd>Shift</kbd> sprint</div><div><kbd>Space</kbd> jump</div>
+        <div><kbd>R</kbd> reload</div><div><kbd>1 2 3</kbd> / <kbd>Wheel</kbd> switch gun</div>
+        <div><kbd>Q</kbd> <kbd>E</kbd> turn</div><div><kbd>Esc</kbd> pause</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div id="screen-settings" class="screen hidden">
+    <div class="panel">
+      <h2>Settings</h2>
+      <label class="row">Music <input type="range" id="set-music" min="0" max="100"></label>
+      <label class="row">Sound effects <input type="range" id="set-sfx" min="0" max="100"></label>
+      <label class="row">Mouse sensitivity <input type="range" id="set-sens" min="10" max="300"></label>
+      <label class="row">Field of view <span class="val" id="fov-val"></span><input type="range" id="set-fov" min="60" max="110"></label>
+      <label class="row">Shadows <input type="checkbox" id="set-shadows"></label>
+      <button class="btn" data-action="fullscreen">Toggle Fullscreen (F11)</button>
+      <button class="btn danger" data-action="reset">Reset High Score</button>
+      <button class="btn" data-action="back-settings">Back</button>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div id="screen-pause" class="screen hidden">
+    <div class="panel">
+      <h2>Paused</h2>
+      <button class="btn big" data-action="resume">Resume</button>
+      <button class="btn" data-action="restart">Restart</button>
+      <button class="btn" data-action="settings-pause">Settings</button>
+      <button class="btn" data-action="menu">Main Menu</button>
+    </div>
+  </div>
+
+  <!-- Game over -->
+  <div id="screen-over" class="screen hidden">
+    <div class="panel">
+      <h2 class="over-title">GAME OVER</h2>
+      <div class="stats">
+        <div><span>Wave</span><b id="over-wave">1</b></div>
+        <div><span>Score</span><b id="over-score">0</b></div>
+        <div><span>Kills</span><b id="over-kills">0</b></div>
+        <div><span>Accuracy</span><b id="over-acc">0%</b></div>
+      </div>
+      <div id="over-record" class="record hidden">⭐ New High Score! ⭐</div>
+      <div id="over-best" class="best"></div>
+      <button class="btn big" data-action="restart">Play Again</button>
+      <button class="btn" data-action="menu">Main Menu</button>
+    </div>
+  </div>
+
+  <script type="module" src="src/game.js"></script>
+</body>
+</html>
